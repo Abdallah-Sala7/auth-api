@@ -38,6 +38,13 @@ server.post("/api/auth/register", (req, res) => {
     res.status(status).json({ status, message });
     return;
   }
+  
+  if (email === "" || password === "") {
+    const status = 401;
+    const message = "Email or Password cannot be empty";
+    res.status(status).json({ status, message });
+    return;
+  }
 
   fs.readFile("./users.json", (err, data) => {
     if (err) {
